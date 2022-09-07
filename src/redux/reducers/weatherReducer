@@ -1,0 +1,17 @@
+let initialState = {
+    weather: {}
+}
+
+const weatherReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "SET_WEATHER":
+            return { ...state, weather: action.payload };
+        default:
+            return state;
+    }
+}
+
+// Action-creator'ы для выполнения нужного dispatch (здесь не выполняются, нужны для получения погоды)
+export const setWeatherAction = () => ({ type: "SET_WEATHER", payload: payload });
+
+export default weatherReducer
