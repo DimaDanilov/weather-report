@@ -22,28 +22,29 @@ function getLocation(dispatch) {
 
 export const MainPage = () => {
     const coordinates = useSelector((state) => state.weatherReducer.currentLocation);
+    const weatherData = useSelector((state) => state.weatherReducer.weather);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (!coordinates.longitude || !coordinates.latitude)
             getLocation(dispatch);
-        else
+        else if (!weatherData.temperature)
             dispatch(getWeather(coordinates.longitude, coordinates.latitude))
     }
     );
 
     return <WeatherContainer>
-        <img src={test_img} width="100%" />
+        <img src={test_img} width="100%" alt="" />
         <WeatherInfo>
-            <Temperature>20°</Temperature>
-            <City>Moscow</City>
-            <Weather>Rainy</Weather>
+            <Temperature>{Math.round(weatherData.temperature)}°</Temperature>
+            <City>{weatherData.city}</City>
+            <Weather>{weatherData.weatherType}</Weather>
         </WeatherInfo>
     </WeatherContainer>
 }
 
 const WeatherContainer = styled.div`
-    width: 20%;
+    width: 25%;
     margin: 5vh auto;
     padding: 3%;
     box-shadow: 0px 0px 10px gray;
@@ -60,14 +61,13 @@ const Temperature = styled.h1`
 `;
 const City = styled.h1`
     margin: 10px 0;
-    font-size: 35px;
+    font-size: 30px;
     text-align: start;
     font-family: MontserratLight;
 `;
 const Weather = styled.h1`
     margin: 10px 0;
-    font-size: 40px;
+    font-size: 45px;
     text-align: start;
     font-family: TangerineRegular;
 `;
-
