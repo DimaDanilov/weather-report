@@ -5,6 +5,10 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store.js'
 import reportWebVitals from './reportWebVitals';
+import './assets/fonts/Quicksand-Light.ttf'; 
+import './assets/fonts/Montserrat-Light.ttf'; 
+import './assets/fonts/Tangerine-Regular.ttf'; 
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

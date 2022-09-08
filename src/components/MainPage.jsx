@@ -35,20 +35,39 @@ export const MainPage = () => {
     return <WeatherContainer>
         <img src={test_img} width="100%" />
         <WeatherInfo>
-            <h1>20°</h1>
-            <h1>Moscow</h1>
-            <h1>Rainy</h1>
+            <Temperature>20°</Temperature>
+            <City>Moscow</City>
+            <Weather>Rainy</Weather>
         </WeatherInfo>
     </WeatherContainer>
 }
 
 const WeatherContainer = styled.div`
-  width: 20%;
-  margin: 5vh auto;
-  padding: 3%;
-  box-shadow: 0px 0px 10px gray;
-  border-radius: 1vw;
+    width: 20%;
+    margin: 5vh auto;
+    padding: 3%;
+    box-shadow: 0px 0px 10px gray;
+    border-radius: 1vw;
 `;
 const WeatherInfo = styled.div`
-  margin: auto;
+    margin: auto;
 `;
+const Temperature = styled.h1`
+    margin: 10px 0;
+    font-size: 50px;
+    text-align: start;
+    font-family: QuicksandLight;
+`;
+const City = styled.h1`
+    margin: 10px 0;
+    font-size: 35px;
+    text-align: start;
+    font-family: MontserratLight;
+`;
+const Weather = styled.h1`
+    margin: 10px 0;
+    font-size: 40px;
+    text-align: start;
+    font-family: TangerineRegular;
+`;
+
