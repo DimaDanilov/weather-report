@@ -36,7 +36,10 @@ export const MainPage = () => {
     return <WeatherContainer>
         <img src={test_img} width="100%" alt="" />
         <WeatherInfo>
-            <Temperature>{Math.round(weatherData.temperature)}°</Temperature>
+            <TemperatureContainer>
+                <Temperature>{Math.round(weatherData.temperature)}°</Temperature>
+                <TemperatureFeel>Feels like: {Math.round(weatherData.temperatureFeel)}°</TemperatureFeel>
+            </TemperatureContainer>
             <City>{weatherData.city}</City>
             <Weather>{weatherData.weatherType}</Weather>
         </WeatherInfo>
@@ -53,9 +56,21 @@ const WeatherContainer = styled.div`
 const WeatherInfo = styled.div`
     margin: auto;
 `;
+const TemperatureContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
 const Temperature = styled.h1`
+    align-items: center;
     margin: 10px 0;
     font-size: 50px;
+    text-align: start;
+    font-family: QuicksandLight;
+`;
+const TemperatureFeel = styled.h1`
+    margin: 10px 0;
+    font-size: 25px;
     text-align: start;
     font-family: QuicksandLight;
 `;

@@ -10,6 +10,7 @@ export const getWeather = (longitude, latitude) => {
             console.log(resp)
             dispatch(setWeatherAction(
                 resp.data.main.temp,
+                resp.data.main.feels_like,
                 resp.data.weather[0].main,
                 resp.data.name
             ))
