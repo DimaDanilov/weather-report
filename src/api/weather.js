@@ -1,13 +1,18 @@
 import axios from "axios";
 import { setWeatherAction } from "../redux/reducers/weatherReducer";
 
-const apiUrl = "https://api.tomorrow.io/v4";
+const apiUrl = "https://api.openweathermap.org/data/2.5";
+const apiKey = "92df54a03ce23e7ac26dde57a2e25f99";
 
 export const getWeather = (longitude, latitude) => {
     return function (dispatch) {
-        axios.get(`${apiUrl}/timelines?location=${longitude},${latitude}&fields=temperature,weatherCode&timesteps=1h&units=metric&apikey=YMnwXb9oBBbiNGYa4ZWMJQXKwg3grc2r`).then((resp) => {
-            console.log(resp.data.data)
-            dispatch(setWeatherAction(resp.data.data.timelines[0].intervals[3].values))
+        axios.get(`${apiUrl}/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`).then((resp) => {
+            console.log(resp)
+            dispatch(setWeatherAction(
+                resp.data.main.temp,
+                resp.data.weather[0].main,
+                resp.data.name
+            ))
         });
     };
 };

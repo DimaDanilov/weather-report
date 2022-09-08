@@ -5,7 +5,8 @@ let initialState = {
     },
     weather: {
         temperature: undefined,
-        weatherCode: undefined
+        weatherType: undefined,
+        city: undefined
     }
 }
 
@@ -23,8 +24,9 @@ const weatherReducer = (state = initialState, action) => {
             return {
                 ...state,
                 weather: {
-                    temperature: action.weatherValues.temperature,
-                    weatherCode: action.weatherValues.weatherCode,
+                    temperature: action.temperature,
+                    weatherType: action.weatherType,
+                    city: action.city,
                 }
             };
         default:
@@ -33,7 +35,7 @@ const weatherReducer = (state = initialState, action) => {
 }
 
 // Action-creator'ы для выполнения нужного dispatch (здесь не выполняются, нужны для получения погоды)
-export const setWeatherAction = (weatherValues) => ({ type: "SET_WEATHER", weatherValues });
+export const setWeatherAction = (temperature, weatherType, city) => ({ type: "SET_WEATHER", temperature, weatherType, city });
 export const setGeoPositionAction = (latitude, longitude) => ({ type: "SET_GEO", latitude, longitude });
 
 export default weatherReducer
