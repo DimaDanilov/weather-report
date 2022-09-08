@@ -1,12 +1,14 @@
+import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react"
 import { getWeather } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
+import test_img from "../assets/images/test_img.png";
 
+// Получить текущие координаты и отправить данные в стор
 function getLocation(dispatch) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) =>
-            //Установка геолокации в стор
             dispatch(setGeoPositionAction(position.coords.latitude, position.coords.longitude)),
             (error) => {
                 if (error.PERMISSION_DENIED)
@@ -29,6 +31,24 @@ export const MainPage = () => {
             dispatch(getWeather(coordinates.longitude, coordinates.latitude))
     }
     );
-    
-    return <h1>TEST</h1>
+
+    return <WeatherContainer>
+        <img src={test_img} width="100%" />
+        <WeatherInfo>
+            <h1>20°</h1>
+            <h1>Moscow</h1>
+            <h1>Rainy</h1>
+        </WeatherInfo>
+    </WeatherContainer>
 }
+
+const WeatherContainer = styled.div`
+  width: 20%;
+  margin: 5vh auto;
+  padding: 3%;
+  box-shadow: 0px 0px 10px gray;
+  border-radius: 1vw;
+`;
+const WeatherInfo = styled.div`
+  margin: auto;
+`;
