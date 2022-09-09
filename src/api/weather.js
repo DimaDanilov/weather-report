@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setWeatherAction } from "../redux/reducers/weatherReducer";
+import { setWeatherAction, setWeeklyWeatherAction } from "../redux/reducers/weatherReducer";
 
 const apiUrl = "https://api.openweathermap.org/data/2.5";
 const apiKey = "92df54a03ce23e7ac26dde57a2e25f99";
@@ -14,6 +14,15 @@ export const getWeather = (longitude, latitude) => {
                 resp.data.weather[0].main,
                 resp.data.name
             ))
+        });
+    };
+};
+
+export const getWeatherForAWeek = (longitude, latitude) => {
+    return function (dispatch) {
+        axios.get(`${apiUrl}/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`).then((resp) => {
+            console.log(resp)
+            dispatch(setWeeklyWeatherAction(resp.data.list))
         });
     };
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react"
-import { getWeather } from "../api/weather";
+import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import test_img from "../assets/images/test_img.png";
 
@@ -22,14 +22,17 @@ function getLocation(dispatch) {
 
 export const MainPage = () => {
     const coordinates = useSelector((state) => state.weatherReducer.currentLocation);
-    const weatherData = useSelector((state) => state.weatherReducer.weather);
+    const weatherData = useSelector((state) => state.weatherReducer.weatherToday);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (!coordinates.longitude || !coordinates.latitude)
             getLocation(dispatch);
-        else if (!weatherData.temperature)
-            dispatch(getWeather(coordinates.longitude, coordinates.latitude))
+        else {
+            if (!weatherData.temperature)
+                dispatch(getWeather(coordinates.longitude, coordinates.latitude))
+            else dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
+        }
     }
     );
 
