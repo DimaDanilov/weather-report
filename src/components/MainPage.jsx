@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import test_img from "../assets/images/test_img.png";
+import { WeatherDayInfo } from "./WeatherDayInfo";
 
 // Получить текущие координаты и отправить данные в стор
 function getLocation(dispatch) {
@@ -22,29 +23,36 @@ function getLocation(dispatch) {
 
 export const MainPage = () => {
     const coordinates = useSelector((state) => state.weatherReducer.currentLocation);
-    const weatherData = useSelector((state) => state.weatherReducer.weatherToday);
+    const weatherToday = useSelector((state) => state.weatherReducer.weatherToday);
+    const weatherWeek = useSelector((state) => state.weatherReducer.weatherWeek);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (!coordinates.longitude || !coordinates.latitude)
             getLocation(dispatch);
         else {
-            if (!weatherData.temperature)
+            if (!weatherToday.temperature) {
                 dispatch(getWeather(coordinates.longitude, coordinates.latitude))
-            else dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
+                dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
+            }
         }
     }
     );
+
+    const weekForecast = weatherWeek ? Object.entries(weatherWeek).map(
+        ([date, dayInfo]) => <WeatherDayInfo date={date} dayInfo={dayInfo} />
+    ) : ""
 
     return <WeatherContainer>
         <img src={test_img} width="100%" alt="" />
         <WeatherInfo>
             <TemperatureContainer>
-                <Temperature>{Math.round(weatherData.temperature)}°</Temperature>
-                <TemperatureFeel>Feels like: {Math.round(weatherData.temperatureFeel)}°</TemperatureFeel>
+                <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
+                <TemperatureFeel>Feels like: {Math.round(weatherToday.temperatureFeel)}°</TemperatureFeel>
             </TemperatureContainer>
-            <City>{weatherData.city}</City>
-            <Weather>{weatherData.weatherType}</Weather>
+            <City>{weatherToday.city}</City>
+            <Weather>{weatherToday.weatherType}</Weather>
+            <div>{weekForecast}</div>
         </WeatherInfo>
     </WeatherContainer>
 }
