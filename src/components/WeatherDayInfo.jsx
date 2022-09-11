@@ -1,6 +1,10 @@
+import styled from "styled-components";
+import test_img_small from "../assets/images/test_img_small.png";
+
+// Function to priortize type of weather
 const CheckWeatherPrior = (code) => {
     if (code === "800")
-        return 1
+    return 1
     else switch (code[0]) {
         case "8": return 2
         case "3": return 3
@@ -10,6 +14,7 @@ const CheckWeatherPrior = (code) => {
         default: return 7
     }
 }
+// Function to choose an image of day
 const WeatherToShow = (prior) => {
     switch (prior) {
         case 1: return "ЯСНО"
@@ -24,28 +29,60 @@ const WeatherToShow = (prior) => {
 }
 
 export const WeatherDayInfo = (date) => {
-    // console.log(date.date)
-    console.log(date.dayInfo);
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let dateFormatted = new Date(date.date);
+    let dayOfTheWeek = weekday[dateFormatted.getDay()];
+
     let maxTemperature = null;
     let maxWeatherPrior = null;
-    let maxWeatherPriorDesc = "";
+
     date.dayInfo.forEach(
         timePeriod => {
+            // Search of prior type of weather per day (Snow, Rain, Clear, etc.)
             let timePeriodPrior = CheckWeatherPrior(timePeriod.weatherID)
             if (timePeriodPrior > maxWeatherPrior) {
                 maxWeatherPrior = timePeriodPrior;
-                maxWeatherPriorDesc = timePeriod.weatherDescription;
             }
+            // Search of max temperature per day
             if (maxTemperature < timePeriod.temp) {
                 maxTemperature = timePeriod.temp
             }
         }
     )
 
-    return (<div>
-        <h1>date = {date.date}</h1>
-        <h1>maxTemp = {Math.round(maxTemperature)}°</h1>
-        <h1>Погода = {WeatherToShow(maxWeatherPrior)}</h1>
-        <h1>ПогодаОписание = {maxWeatherPriorDesc}</h1>
-    </div>)
+    return <OneDayContainer>
+        <DayImg src={test_img_small} />
+        {/* <h1>Погода = {WeatherToShow(maxWeatherPrior)}</h1> */}
+        <DayDate>{dayOfTheWeek}</DayDate>
+        <DayTemp>{Math.round(maxTemperature)}°</DayTemp>
+    </OneDayContainer>
 }
+
+const OneDayContainer = styled.div`
+    display: grid;
+    grid-template-areas:
+    "A B"
+    "A C";
+    grid-template-columns: 2fr 5fr;
+    padding: 5% 10%;
+    gap: 5px;
+    box-shadow: 0px 0px 10px gray;
+    border-radius: 1vw;
+`;
+const DayImg = styled.img`
+    width: 100%;
+    margin: auto;
+    grid-area: A;
+`;
+const DayDate = styled.h1`
+    margin: 5px 0;
+    font-size: 25px;
+    font-family: QuicksandLight;
+    grid-area: B;
+`;
+const DayTemp = styled.h1`
+    margin: 5px 0;
+    font-size: 25px;
+    font-family: QuicksandLight;
+    grid-area: C;
+`;

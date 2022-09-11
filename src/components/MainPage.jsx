@@ -44,25 +44,36 @@ export const MainPage = () => {
     ) : ""
 
     return <WeatherContainer>
-        <img src={test_img} width="100%" alt="" />
-        <WeatherInfo>
-            <TemperatureContainer>
-                <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
-                <TemperatureFeel>Feels like: {Math.round(weatherToday.temperatureFeel)}°</TemperatureFeel>
-            </TemperatureContainer>
-            <City>{weatherToday.city}</City>
-            <Weather>{weatherToday.weatherType}</Weather>
-            <div>{weekForecast}</div>
-        </WeatherInfo>
+        <TodayContainer>
+            <img src={test_img} width="100%" alt="" />
+            <WeatherInfo>
+                <TemperatureContainer>
+                    <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
+                    <TemperatureFeel>Feels like: {Math.round(weatherToday.temperatureFeel)}°</TemperatureFeel>
+                </TemperatureContainer>
+                <City>{weatherToday.city}</City>
+                <Weather>{weatherToday.weatherType}</Weather>
+            </WeatherInfo>
+        </TodayContainer>
+        <WeekContainer>{weekForecast}</WeekContainer>
     </WeatherContainer>
 }
 
 const WeatherContainer = styled.div`
-    width: 25%;
+    width: 40%;
+    display: flex;
     margin: 5vh auto;
+    box-shadow: 0px 0px 10px gray;
+    border-radius: 1vw;
+`;
+const TodayContainer = styled.div`
+    width: 60%;
     padding: 3%;
     box-shadow: 0px 0px 10px gray;
     border-radius: 1vw;
+    `;
+const WeekContainer = styled.div`
+    width: 40%;
 `;
 const WeatherInfo = styled.div`
     margin: auto;

@@ -33,19 +33,25 @@ const weatherReducer = (state = initialState, action) => {
                 }
             };
         case "SET_WEATHER_WEEK":
+            let weekArray = action.temperatureArray.map( // Маппинг массива из АПИ для урезания данных
+                it => ({
+                    date: it.dt_txt.slice(0, -9),
+                    temp: it.main.temp,
+                    weatherID: it.weather[0].id.toString(),
+                    weatherDescription: it.weather[0].main
+                }))
+            let weekObject = weekArray.reduce(function (r, a) { // Группировка по дате
+                r[a.date] = r[a.date] || [];
+                r[a.date].push(a);
+                return r;
+            }, Object.create(null))
+            // Удаление сегодняшней даты
+            const keys = Reflect.ownKeys(weekObject);
+            if (keys.length) delete weekObject[keys[0]];
+
             return {
                 ...state,
-                weatherWeek: action.temperatureArray.map( // Маппинг массива из АПИ для урезания данных
-                    it => ({
-                        date: it.dt_txt.slice(0, -9),
-                        temp: it.main.temp,
-                        weatherID: it.weather[0].id.toString(),
-                        weatherDescription: it.weather[0].main
-                    })).reduce(function (r, a) { // Группировка по дате
-                        r[a.date] = r[a.date] || [];
-                        r[a.date].push(a);
-                        return r;
-                    }, Object.create(null))
+                weatherWeek: weekObject
             };
         default:
             return state;
