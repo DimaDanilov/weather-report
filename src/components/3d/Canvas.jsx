@@ -1,15 +1,14 @@
+import { useRef, Suspense } from 'react'
 import * as THREE from 'three'
-import { useRef } from 'react'
-import CameraControls from 'camera-controls'
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
-import { Box } from "./Box"
-import { Suspense } from "react"
+import CameraControls from 'camera-controls'
+import { Model } from "./Model"
 
-export const WeatherCanvas = () => {
-
-    CameraControls.install({ THREE })
+export const WeatherCanvas = ({weatherCode}) => {
+    CameraControls.install({ THREE }) 
     extend({ CameraControls })
 
+    // Controls to rotate scene
     function Controls() {
         const ref = useRef()
         const camera = useThree((state) => state.camera)
@@ -20,7 +19,7 @@ export const WeatherCanvas = () => {
 
     return <Canvas>
         <Suspense fallback={null}>
-            <Box />
+            <Model weatherCode={weatherCode}/>
         </Suspense>
         <pointLight position={[10, -10, 10]} power={1} />
         <pointLight position={[-10, -10, -10]} power={1} />

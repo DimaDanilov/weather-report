@@ -11,6 +11,7 @@ export const getWeather = (longitude, latitude) => {
             dispatch(setWeatherAction(
                 resp.data.main.temp,
                 resp.data.main.feels_like,
+                resp.data.weather[0].id,
                 resp.data.weather[0].main,
                 resp.data.name
             ))

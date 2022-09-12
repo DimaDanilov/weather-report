@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import { WeatherDayInfo } from "./WeatherDayInfo";
-import { WeatherCanvas } from "./Canvas";
+import { WeatherCanvas } from "./3d/Canvas";
 
 // Получить текущие координаты и отправить данные в стор
 function getLocation(dispatch) {
@@ -47,7 +47,7 @@ export const MainPage = () => {
         <TodayContainer>
             {/* <img src={test_img} width="100%" alt="" /> */}
             <CanvasContainer>
-                <WeatherCanvas />
+                <WeatherCanvas weatherCode={weatherToday.weatherID} />
             </CanvasContainer>
 
             <WeatherInfo>
