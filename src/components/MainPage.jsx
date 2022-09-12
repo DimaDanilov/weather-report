@@ -5,6 +5,7 @@ import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import test_img from "../assets/images/test_img.png";
 import { WeatherDayInfo } from "./WeatherDayInfo";
+import { WeatherCanvas } from "./Canvas";
 
 // Получить текущие координаты и отправить данные в стор
 function getLocation(dispatch) {
@@ -45,7 +46,11 @@ export const MainPage = () => {
 
     return <WeatherContainer>
         <TodayContainer>
-            <img src={test_img} width="100%" alt="" />
+            {/* <img src={test_img} width="100%" alt="" /> */}
+            <CanvasContainer>
+                <WeatherCanvas />
+            </CanvasContainer>
+
             <WeatherInfo>
                 <TemperatureContainer>
                     <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
@@ -71,7 +76,11 @@ const TodayContainer = styled.div`
     padding: 3%;
     box-shadow: 0px 0px 10px gray;
     border-radius: 1vw;
-    `;
+`;
+const CanvasContainer = styled.div`
+    width: 100%;
+	aspect-ratio:1/1;
+`;
 const WeekContainer = styled.div`
     width: 40%;
 `;

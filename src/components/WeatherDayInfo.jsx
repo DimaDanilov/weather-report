@@ -4,32 +4,35 @@ import test_img_small from "../assets/images/test_img_small.png";
 // Function to priortize type of weather
 const CheckWeatherPrior = (code) => {
     if (code === "800")
-    return 1
+        return 1
+    if (code === "801")
+        return 2
     else switch (code[0]) {
-        case "8": return 2
-        case "3": return 3
-        case "5": return 4
-        case "2": return 5
-        case "6": return 6
-        default: return 7
+        case "8": return 3
+        case "3": return 4
+        case "5": return 5
+        case "2": return 6
+        case "6": return 7
+        default: return 8
     }
 }
 // Function to choose an image of day
 const WeatherToShow = (prior) => {
     switch (prior) {
         case 1: return "ЯСНО"
-        case 2: return "ОБЛАЧНО"
-        case 3: return "МОРОСЬ"
-        case 4: return "ДОЖДЬ"
-        case 5: return "ГРОЗА"
-        case 6: return "СНЕГ"
-        case 7: return "ЧТО-ТО ДРУГОЕ"
+        case 2: return "НЕМНОЖКО ОБЛАЧНО"
+        case 3: return "ОБЛАЧНО"
+        case 4: return "МОРОСЬ"
+        case 5: return "ДОЖДЬ"
+        case 6: return "ГРОЗА"
+        case 7: return "СНЕГ"
+        case 8: return "ЧТО-ТО ДРУГОЕ"
         default: return "ОШИБКА"
     }
 }
 
 export const WeatherDayInfo = (date) => {
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let dateFormatted = new Date(date.date);
     let dayOfTheWeek = weekday[dateFormatted.getDay()];
 
