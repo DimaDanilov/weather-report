@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react"
 import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
-import test_img from "../assets/images/test_img.png";
 import { WeatherDayInfo } from "./WeatherDayInfo";
 import { WeatherCanvas } from "./Canvas";
 

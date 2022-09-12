@@ -1,40 +1,35 @@
 import styled from "styled-components";
-import test_img_small from "../assets/images/test_img_small.png";
+import sunImg from "../assets/images/sun_small.png";
+import sunCloudImg from "../assets/images/sun_cloud_small.png";
+import cloudsImg from "../assets/images/clouds_small.png";
+import drizzleImg from "../assets/images/drizzle_small.png";
+import rainImg from "../assets/images/rain_small.png";
+import thunderImg from "../assets/images/thunder_small.png";
+import snowImg from "../assets/images/snow_small.png";
+import defaultImg from "../assets/images/default_small.png";
 
-// Function to priortize type of weather
+const WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// Prioritize type of weather
+const PRIOR_WEATHER_IMAGES = [sunImg, sunCloudImg, cloudsImg, drizzleImg, rainImg, thunderImg, snowImg, defaultImg]
 const CheckWeatherPrior = (code) => {
     if (code === "800")
-        return 1
+        return 0
     if (code === "801")
-        return 2
+        return 1
     else switch (code[0]) {
-        case "8": return 3
-        case "3": return 4
-        case "5": return 5
-        case "2": return 6
-        case "6": return 7
-        default: return 8
-    }
-}
-// Function to choose an image of day
-const WeatherToShow = (prior) => {
-    switch (prior) {
-        case 1: return "ЯСНО"
-        case 2: return "НЕМНОЖКО ОБЛАЧНО"
-        case 3: return "ОБЛАЧНО"
-        case 4: return "МОРОСЬ"
-        case 5: return "ДОЖДЬ"
-        case 6: return "ГРОЗА"
-        case 7: return "СНЕГ"
-        case 8: return "ЧТО-ТО ДРУГОЕ"
-        default: return "ОШИБКА"
+        case "8": return 2
+        case "3": return 3
+        case "5": return 4
+        case "2": return 5
+        case "6": return 6
+        default: return 7
     }
 }
 
 export const WeatherDayInfo = (date) => {
-    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // Get current day of the week (Monday, Tuesday etc.)
     let dateFormatted = new Date(date.date);
-    let dayOfTheWeek = weekday[dateFormatted.getDay()];
+    let dayOfTheWeek = WEEK_DAYS[dateFormatted.getDay()];
 
     let maxTemperature = null;
     let maxWeatherPrior = null;
@@ -54,10 +49,9 @@ export const WeatherDayInfo = (date) => {
     )
 
     return <OneDayContainer>
-        <DayImg src={test_img_small} />
-        {/* <h1>Погода = {WeatherToShow(maxWeatherPrior)}</h1> */}
+        <DayImg src={PRIOR_WEATHER_IMAGES[maxWeatherPrior]} />
         <DayDate>{dayOfTheWeek}</DayDate>
-        <DayTemp>{Math.round(maxTemperature)}°</DayTemp>
+        <DayTemperature>{Math.round(maxTemperature)}°</DayTemperature>
     </OneDayContainer>
 }
 
@@ -83,7 +77,7 @@ const DayDate = styled.h1`
     font-family: QuicksandLight;
     grid-area: B;
 `;
-const DayTemp = styled.h1`
+const DayTemperature = styled.h1`
     margin: 5px 0;
     font-size: 25px;
     font-family: QuicksandLight;
