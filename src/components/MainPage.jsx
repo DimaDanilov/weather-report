@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { getWeather, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import { WeatherDayInfo } from "./WeatherDayInfo";
-import { WeatherCanvas } from "./3d/Canvas";
+import { WeatherCanvas } from "./3d/WeatherCanvas";
 
 // Получить текущие координаты и отправить данные в стор
 function getLocation(dispatch) {
@@ -45,11 +45,7 @@ export const MainPage = () => {
 
     return <WeatherContainer>
         <TodayContainer>
-            {/* <img src={test_img} width="100%" alt="" /> */}
-            <CanvasContainer>
-                <WeatherCanvas weatherCode={weatherToday.weatherID} />
-            </CanvasContainer>
-
+            <WeatherCanvas weatherCode={weatherToday.weatherID} />
             <WeatherInfo>
                 <TemperatureContainer>
                     <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
@@ -59,6 +55,7 @@ export const MainPage = () => {
                 <Weather>{weatherToday.weatherType}</Weather>
             </WeatherInfo>
         </TodayContainer>
+        
         <WeekContainer>{weekForecast}</WeekContainer>
     </WeatherContainer>
 }
@@ -67,21 +64,20 @@ const WeatherContainer = styled.div`
     width: 40%;
     display: flex;
     margin: 5vh auto;
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 5px gray;
     border-radius: 1vw;
+    border-collapse: collapse;
 `;
 const TodayContainer = styled.div`
     width: 60%;
     padding: 3%;
-    box-shadow: 0px 0px 10px gray;
-    border-radius: 1vw;
-`;
-const CanvasContainer = styled.div`
-    width: 100%;
-	aspect-ratio:1/1;
+    border: 1px solid black;
+    border-radius: 1vw 0 0 1vw;
 `;
 const WeekContainer = styled.div`
     width: 40%;
+    border: 1px solid black;
+    border-radius: 0 1vw 1vw 0;
 `;
 const WeatherInfo = styled.div`
     margin: auto;

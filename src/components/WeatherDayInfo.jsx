@@ -12,15 +12,15 @@ import { CheckWeatherPrior } from "./staff/WeatherPrior";
 const WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const PRIOR_WEATHER_IMAGES = [sunImg, sunCloudImg, cloudsImg, drizzleImg, rainImg, thunderImg, snowImg, defaultImg]
 
-export const WeatherDayInfo = (date) => {
+export const WeatherDayInfo = ({ date, dayInfo }) => {
     // Get current day of the week (Monday, Tuesday etc.)
-    let dateFormatted = new Date(date.date);
+    let dateFormatted = new Date(date);
     let dayOfTheWeek = WEEK_DAYS[dateFormatted.getDay()];
 
     let maxTemperature = null;
     let maxWeatherPrior = null;
 
-    date.dayInfo.forEach(
+    dayInfo.forEach(
         timePeriod => {
             // Search of prior type of weather per day (Snow, Rain, Clear, etc.)
             let timePeriodPrior = CheckWeatherPrior(timePeriod.weatherID)
@@ -49,8 +49,7 @@ const OneDayContainer = styled.div`
     grid-template-columns: 2fr 5fr;
     padding: 5% 10%;
     gap: 5px;
-    box-shadow: 0px 0px 10px gray;
-    border-radius: 1vw;
+    border-bottom: 1px solid black
 `;
 const DayImg = styled.img`
     width: 100%;
