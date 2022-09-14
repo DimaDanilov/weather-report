@@ -19,14 +19,20 @@ code {
   font-weight: 300;
 }
 @font-face {
+  font-family: "QuicksandRegular";
+  src: local("QuicksandRegular"),
+    url("./assets/fonts/Quicksand-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
   font-family: "MontserratLight";
   src: local("MontserratLight"),
     url("./assets/fonts/Montserrat-Light.ttf") format("truetype");
   font-weight: 300;
 }
 @font-face {
-  font-family: "TangerineRegular";
-  src: local("TangerineRegular"),
-    url("./assets/fonts/Tangerine-Regular.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "MontserratRegular";
+  src: local("MontserratRegular"),
+    url("./assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 300;
 }
