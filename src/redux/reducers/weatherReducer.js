@@ -67,7 +67,7 @@ const weatherReducer = (state = initialState, action) => {
 }
 
 // Action-creator'ы для выполнения нужного dispatch (здесь не выполняются, нужны для получения погоды)
-export const setWeatherAction = (currentTimestamp, temperature, temperatureFeel, humidity, weatherID, weatherType, windSpeed, city) =>
+export const setCurrentWeatherAction = (currentTimestamp, temperature, temperatureFeel, humidity, weatherID, weatherType, windSpeed, city) =>
     ({ type: "SET_WEATHER", currentTimestamp, temperature, temperatureFeel, humidity, weatherID, weatherType, windSpeed, city });
 export const setWeeklyWeatherAction = (temperatureArray) =>
     ({ type: "SET_WEATHER_WEEK", temperatureArray });

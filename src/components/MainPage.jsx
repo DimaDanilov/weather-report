@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react"
-import { getWeather, getWeatherForAWeek } from "../api/weather";
+import { getWeatherForToday, getWeatherForAWeek } from "../api/weather";
 import { setGeoPositionAction } from "../redux/reducers/weatherReducer";
 import { WeekForecast } from "./weather_sections/WeekForecast";
 import { WeatherType } from "./weather_sections/WeatherType";
@@ -33,7 +33,7 @@ export const MainPage = () => {
             getLocation(dispatch);
         else {
             if (!weatherToday.temperature) {
-                dispatch(getWeather(coordinates.longitude, coordinates.latitude))
+                dispatch(getWeatherForToday(coordinates.longitude, coordinates.latitude))
                 dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
             }
         }
