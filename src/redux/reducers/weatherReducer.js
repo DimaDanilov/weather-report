@@ -6,8 +6,10 @@ let initialState = {
     weatherToday: {
         temperature: undefined,
         temperatureFeel: undefined,
+        humidity: undefined,
         weatherID: undefined,
         weatherType: undefined,
+        windSpeed: undefined,
         city: undefined
     },
     weatherWeek: undefined
@@ -29,8 +31,10 @@ const weatherReducer = (state = initialState, action) => {
                 weatherToday: {
                     temperature: action.temperature,
                     temperatureFeel: action.temperatureFeel,
+                    humidity: action.humidity,
                     weatherID: action.weatherID.toString(),
                     weatherType: action.weatherType,
+                    windSpeed: action.windSpeed,
                     city: action.city,
                 }
             };
@@ -61,8 +65,8 @@ const weatherReducer = (state = initialState, action) => {
 }
 
 // Action-creator'ы для выполнения нужного dispatch (здесь не выполняются, нужны для получения погоды)
-export const setWeatherAction = (temperature, temperatureFeel, weatherID, weatherType, city) =>
-    ({ type: "SET_WEATHER", temperature, temperatureFeel, weatherID, weatherType, city });
+export const setWeatherAction = (temperature, temperatureFeel, humidity, weatherID, weatherType, windSpeed, city) =>
+    ({ type: "SET_WEATHER", temperature, temperatureFeel, humidity, weatherID, weatherType, windSpeed, city });
 export const setWeeklyWeatherAction = (temperatureArray) =>
     ({ type: "SET_WEATHER_WEEK", temperatureArray });
 export const setGeoPositionAction = (latitude, longitude) => ({ type: "SET_GEO", latitude, longitude });
