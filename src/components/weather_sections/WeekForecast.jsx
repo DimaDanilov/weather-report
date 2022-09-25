@@ -69,6 +69,9 @@ const WeatherDayInfo = ({ date, dayInfo }) => {
 
 const WeekContainer = styled.div`
     width: 100%;
+    @media (min-width:768px) and (max-width:1200px) {
+        grid-area: WEEK;
+    }
 `;
 const OneDayContainer = styled.div`
     display: grid;
@@ -77,6 +80,9 @@ const OneDayContainer = styled.div`
     border-bottom: 1px solid black;
     align-items: center;
     padding: 5% 0;
+    @media (min-width:768px) and (max-width:1200px) {
+        padding: 2% 0;
+    }
 `;
 const DayOfTheWeek = styled.h1`
     font-size: 28px;
