@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { WeatherCanvas } from "../3d/WeatherCanvas";
+import { useSelector } from "react-redux";
 
-export const WeatherType = ({ weatherCode, weatherType }) =>
-    <Container>
-        <WeatherCanvas weatherCode={weatherCode} />
-        <TypeTitle>{weatherType}</TypeTitle>
-    </Container>
+export const WeatherType = () => {
+    const weatherToday = useSelector((state) => state.weatherReducer.weatherToday);
 
-const Container = styled.div`
-    width: 100%;
-`;
+    return <div>
+        <WeatherCanvas weatherCode={weatherToday.weatherID} />
+        <TypeTitle>{weatherToday.weatherType}</TypeTitle>
+    </div>
+}
+
 const TypeTitle = styled.h1`
     margin: 10px 0;
     font-family: QuicksandRegular;

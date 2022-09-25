@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import { getWeatherForAWeek } from "../../api/weather";
+import { CheckWeatherPrior } from "../staff/WeatherPrior";
 import sunImg from "../../assets/images/sun_small.png";
 import sunCloudImg from "../../assets/images/sun_cloud_small.png";
 import cloudsImg from "../../assets/images/clouds_small.png";
@@ -7,12 +11,22 @@ import rainImg from "../../assets/images/rain_small.png";
 import thunderImg from "../../assets/images/thunder_small.png";
 import snowImg from "../../assets/images/snow_small.png";
 import defaultImg from "../../assets/images/default_small.png";
-import { CheckWeatherPrior } from "../staff/WeatherPrior";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const PRIOR_WEATHER_IMAGES = [sunImg, sunCloudImg, cloudsImg, drizzleImg, rainImg, thunderImg, snowImg, defaultImg]
 
-export const WeekForecast = ({ weatherWeek }) => {
+export const WeekForecast = () => {
+    const dispatch = useDispatch();
+
+    const coordinates = useSelector((state) => state.weatherReducer.currentLocation);
+    const weatherWeek = useSelector((state) => state.weatherReducer.weatherWeek);
+
+    useEffect(() => {
+        if (!weatherWeek) {
+            dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
+        }
+    });
+
     const weekForecast = weatherWeek ? Object.entries(weatherWeek).map(
         ([date, dayInfo]) => <WeatherDayInfo date={date} dayInfo={dayInfo} />
     ) : ""

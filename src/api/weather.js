@@ -1,12 +1,15 @@
 import axios from "axios";
 import { setCurrentWeatherAction, setWeeklyWeatherAction } from "../redux/reducers/weatherReducer";
 
-const apiUrl = "https://api.openweathermap.org/data/2.5";
-const apiKey = "92df54a03ce23e7ac26dde57a2e25f99";
+
+const apiKey = `${process.env.REACT_APP_API_KEY}`;
+const http = axios.create({
+    baseURL: `${process.env.REACT_APP_API}/data/2.5`
+})
 
 export const getWeatherForToday = (longitude, latitude) => {
     return function (dispatch) {
-        axios.get(`${apiUrl}/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`).then((resp) => {
+        http.get(`weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`).then((resp) => {
             dispatch(setCurrentWeatherAction(
                 resp.data.dt,
                 resp.data.main.temp,
@@ -23,7 +26,7 @@ export const getWeatherForToday = (longitude, latitude) => {
 
 export const getWeatherForAWeek = (longitude, latitude) => {
     return function (dispatch) {
-        axios.get(`${apiUrl}/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`).then((resp) => {
+        http.get(`forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`).then((resp) => {
             dispatch(setWeeklyWeatherAction(resp.data.list))
         });
     };
