@@ -7,6 +7,7 @@ import { IconText } from "../staff/IconText";
 import locationIcon from "../../assets/icons/location_icon.svg";
 import humidityIcon from "../../assets/icons/humidity_icon.svg";
 import windIcon from "../../assets/icons/wind_icon.svg";
+import { Loader } from "../staff/Loader";
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -44,16 +45,18 @@ export const WeatherInfo = () => {
         }
     });
 
-    return <Container>
-        <IconText imgSrc={locationIcon} textContent={weatherToday.city} margin="5px 0" fontSize="30px" fontFamily="MontserratRegular" />
-        <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
-        <TemperatureFeel>Feels like: {Math.round(weatherToday.temperatureFeel)}°</TemperatureFeel>
-        <HumidityWindContainer>
-            <IconText imgSrc={humidityIcon} textContent={weatherToday.humidity + "%"} fontSize="24px" fontFamily="MontserratLight" />
-            <IconText imgSrc={windIcon} textContent={weatherToday.windSpeed + " m/s"} fontSize="24px" fontFamily="MontserratLight" />
-        </HumidityWindContainer>
-        <DateToday>{currentTime}</DateToday>
-    </Container>
+    return (
+        weatherToday.temperature ? <Container>
+            <IconText imgSrc={locationIcon} textContent={weatherToday.city} margin="5px 0" fontSize="30px" fontFamily="MontserratRegular" />
+            <Temperature>{Math.round(weatherToday.temperature)}°</Temperature>
+            <TemperatureFeel>Feels like: {Math.round(weatherToday.temperatureFeel)}°</TemperatureFeel>
+            <HumidityWindContainer>
+                <IconText imgSrc={humidityIcon} textContent={weatherToday.humidity + "%"} fontSize="24px" fontFamily="MontserratLight" />
+                <IconText imgSrc={windIcon} textContent={weatherToday.windSpeed + " m/s"} fontSize="24px" fontFamily="MontserratLight" />
+            </HumidityWindContainer>
+            <DateToday>{currentTime}</DateToday>
+        </Container> : <Loader />
+    )
 }
 
 const Container = styled.div`

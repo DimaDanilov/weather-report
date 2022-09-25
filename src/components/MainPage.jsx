@@ -11,7 +11,9 @@ export const MainPage = () =>
     </WeatherContainer>
 
 const WeatherContainer = styled.div`
-    width: 90%;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 5vh auto;

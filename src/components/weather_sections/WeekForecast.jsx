@@ -11,6 +11,7 @@ import rainImg from "../../assets/images/rain_small.png";
 import thunderImg from "../../assets/images/thunder_small.png";
 import snowImg from "../../assets/images/snow_small.png";
 import defaultImg from "../../assets/images/default_small.png";
+import { Loader } from "../staff/Loader";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const PRIOR_WEATHER_IMAGES = [sunImg, sunCloudImg, cloudsImg, drizzleImg, rainImg, thunderImg, snowImg, defaultImg]
@@ -31,7 +32,7 @@ export const WeekForecast = () => {
         ([date, dayInfo]) => <WeatherDayInfo date={date} dayInfo={dayInfo} />
     ) : ""
 
-    return <WeekContainer>{weekForecast}</WeekContainer>
+    return weatherWeek ? <WeekContainer>{weekForecast}</WeekContainer> : <Loader />
 }
 
 const WeatherDayInfo = ({ date, dayInfo }) => {
