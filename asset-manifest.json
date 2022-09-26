@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/weather-report/static/css/main.c7d72041.css",
+    "main.js": "/weather-report/static/js/main.fc5da258.js",
+    "static/js/787.82b11104.chunk.js": "/weather-report/static/js/787.82b11104.chunk.js",
+    "static/media/Montserrat-Light.ttf": "/weather-report/static/media/Montserrat-Light.6fcc9263a21be961d246.ttf",
+    "static/media/Montserrat-Regular.ttf": "/weather-report/static/media/Montserrat-Regular.ceb11275ab638627a643.ttf",
+    "static/media/thunder_small.png": "/weather-report/static/media/thunder_small.63df268ea3f08cbb00fd.png",
+    "static/media/sun_small.png": "/weather-report/static/media/sun_small.e18cb1fd94287c65bd6d.png",
+    "static/media/clouds_small.png": "/weather-report/static/media/clouds_small.ce01aec1237d81e80855.png",
+    "static/media/sun_cloud_small.png": "/weather-report/static/media/sun_cloud_small.7b284456a25176e786df.png",
+    "static/media/snow_small.png": "/weather-report/static/media/snow_small.bdeb222bbad885bccd68.png",
+    "static/media/Quicksand-Regular.ttf": "/weather-report/static/media/Quicksand-Regular.04b11c8f0d4d58c1bed1.ttf",
+    "static/media/rain_small.png": "/weather-report/static/media/rain_small.056aeca1fe78e3667880.png",
+    "static/media/Quicksand-Light.ttf": "/weather-report/static/media/Quicksand-Light.a7f8083e8b93da348dcc.ttf",
+    "static/media/drizzle_small.png": "/weather-report/static/media/drizzle_small.44bbe825b3c1f8709705.png",
+    "index.html": "/weather-report/index.html",
+    "static/media/wind_icon.svg": "/weather-report/static/media/wind_icon.97db192e1b4a2b4209482c392fd1be2a.svg",
+    "static/media/location_icon.svg": "/weather-report/static/media/location_icon.2f059afe05723edb3a730cdeb23c04e4.svg",
+    "static/media/humidity_icon.svg": "/weather-report/static/media/humidity_icon.4de81017a5365735cc30118e280601c7.svg",
+    "main.c7d72041.css.map": "/weather-report/static/css/main.c7d72041.css.map",
+    "main.fc5da258.js.map": "/weather-report/static/js/main.fc5da258.js.map",
+    "787.82b11104.chunk.js.map": "/weather-report/static/js/787.82b11104.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c7d72041.css",
+    "static/js/main.fc5da258.js"
+  ]
+}
