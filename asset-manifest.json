@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/weather-report/static/css/main.c7d72041.css",
-    "main.js": "/weather-report/static/js/main.fc5da258.js",
+    "main.js": "/weather-report/static/js/main.41d7c7e5.js",
     "static/js/787.82b11104.chunk.js": "/weather-report/static/js/787.82b11104.chunk.js",
     "static/media/Montserrat-Light.ttf": "/weather-report/static/media/Montserrat-Light.6fcc9263a21be961d246.ttf",
     "static/media/Montserrat-Regular.ttf": "/weather-report/static/media/Montserrat-Regular.ceb11275ab638627a643.ttf",
@@ -19,11 +19,11 @@
     "static/media/location_icon.svg": "/weather-report/static/media/location_icon.2f059afe05723edb3a730cdeb23c04e4.svg",
     "static/media/humidity_icon.svg": "/weather-report/static/media/humidity_icon.4de81017a5365735cc30118e280601c7.svg",
     "main.c7d72041.css.map": "/weather-report/static/css/main.c7d72041.css.map",
-    "main.fc5da258.js.map": "/weather-report/static/js/main.fc5da258.js.map",
+    "main.41d7c7e5.js.map": "/weather-report/static/js/main.41d7c7e5.js.map",
     "787.82b11104.chunk.js.map": "/weather-report/static/js/787.82b11104.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c7d72041.css",
-    "static/js/main.fc5da258.js"
+    "static/js/main.41d7c7e5.js"
   ]
 }
