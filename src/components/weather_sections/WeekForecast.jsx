@@ -23,13 +23,13 @@ export const WeekForecast = () => {
     const weatherWeek = useSelector((state) => state.weatherReducer.weatherWeek);
 
     useEffect(() => {
-        if (!weatherWeek) {
+        if ((!weatherWeek) && (coordinates.longitude) && (coordinates.latitude)) {
             dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude))
         }
     });
 
     const weekForecast = weatherWeek ? Object.entries(weatherWeek).map(
-        ([date, dayInfo]) => <WeatherDayInfo date={date} dayInfo={dayInfo} />
+        ([date, dayInfo]) => <WeatherDayInfo key={date} date={date} dayInfo={dayInfo} />
     ) : ""
 
     return weatherWeek ? <WeekContainer>{weekForecast}</WeekContainer> : <Loader />
@@ -40,7 +40,7 @@ const WeatherDayInfo = ({ date, dayInfo }) => {
     const dateFormatted = new Date(date);
     const dayOfTheWeek = WEEK_DAYS[dateFormatted.getDay()];
 
-    let maxTemperature = null;
+    let maxTemperature = undefined;
     let maxWeatherIDPrior = null;
     let maxWeatherDescriptionPrior = null;
 
@@ -53,7 +53,9 @@ const WeatherDayInfo = ({ date, dayInfo }) => {
                 maxWeatherDescriptionPrior = timePeriod.weatherDescription
             }
             // Search of max temperature per day
-            if (maxTemperature < timePeriod.temp) {
+            if (maxTemperature === undefined) {
+                maxTemperature = timePeriod.temp
+            } else if (maxTemperature < timePeriod.temp) {
                 maxTemperature = timePeriod.temp
             }
         }
