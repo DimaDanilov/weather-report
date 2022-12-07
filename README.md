@@ -2,6 +2,10 @@
 
 Weather App with display of current weather forecast, weekly forecast and 3D models of current weather.
 
+## Preview
+
+You can watch [Weather Report](https://dimadanilov.github.io/weather-report) here.
+
 ## Technology
 
 This project made on React with usage of Redux, React-three-fiber(for 3D model of weather) and API.
