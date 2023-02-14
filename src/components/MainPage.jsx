@@ -2,13 +2,37 @@ import styled from "styled-components";
 import { WeekForecast } from "./weather_sections/WeekForecast";
 import { WeatherType } from "./weather_sections/WeatherType";
 import { WeatherInfo } from "./weather_sections/WeatherInfo";
+import { useSelector } from "react-redux";
 
-export const MainPage = () =>
-    <WeatherContainer>
+export const MainPage = () => {
+  const coordinates = useSelector(
+    (state) => state.weatherReducer.currentLocation
+  );
+
+  return (
+    <>
+      {!coordinates.longitude || !coordinates.latitude ? (
+        <WarningTitle>
+          Accept geolocation to show weather in your city
+        </WarningTitle>
+      ) : (
+        <></>
+      )}
+      <WeatherContainer>
         <WeatherType />
         <WeatherInfo />
         <WeekForecast />
-    </WeatherContainer>
+      </WeatherContainer>
+    </>
+  );
+};
+
+const WarningTitle = styled.h1`
+  margin: 10px 0;
+  font-family: QuicksandRegular;
+  font-weight: normal;
+  font-size: 40px;
+`;
 
 const WeatherContainer = styled.div`
     width: 100%;
