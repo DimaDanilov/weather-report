@@ -1,12 +1,13 @@
+import React from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getWeatherForToday } from "../../api/weather";
 import { setGeoPositionAction } from "../../redux/reducers/weatherReducer";
 import { IconText } from "../staff/IconText";
-import locationIcon from "../../assets/icons/location_icon.svg";
-import humidityIcon from "../../assets/icons/humidity_icon.svg";
-import windIcon from "../../assets/icons/wind_icon.svg";
+import locationIcon from "Public/icons/location_icon.svg";
+import humidityIcon from "Public/icons/humidity_icon.svg";
+import windIcon from "Public/icons/wind_icon.svg";
 import { Loader } from "../staff/Loader";
 
 const MONTHS = [
