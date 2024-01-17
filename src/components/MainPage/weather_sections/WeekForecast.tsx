@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWeatherForAWeek } from "../../api/weather";
+import { getWeatherForWeek } from "../../../api/WeatherApi";
 import { CheckWeatherPrior } from "../staff/WeatherPrior";
 import sunImg from "Public/images/sun_small.png";
 import sunCloudImg from "Public/images/sun_cloud_small.png";
@@ -13,6 +13,9 @@ import thunderImg from "Public/images/thunder_small.png";
 import snowImg from "Public/images/snow_small.png";
 import defaultImg from "Public/images/default_small.png";
 import { Loader } from "../staff/Loader";
+import { IRootState } from "Store/reducers/rootReducer";
+import { AppDispatch } from "Store";
+import { WeatherWeekElement } from "../../../types/WeatherModel";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const PRIOR_WEATHER_IMAGES = [
@@ -27,22 +30,34 @@ const PRIOR_WEATHER_IMAGES = [
 ];
 
 export const WeekForecast = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const coordinates = useSelector(
-    (state) => state.weatherReducer.currentLocation
+    (state: IRootState) => state.weather.currentLocation
   );
-  const weatherWeek = useSelector((state) => state.weatherReducer.weatherWeek);
+  const weatherWeek = useSelector(
+    (state: IRootState) => state.weather.weatherWeek
+  );
 
   useEffect(() => {
-    if (!weatherWeek && coordinates.longitude && coordinates.latitude) {
-      dispatch(getWeatherForAWeek(coordinates.longitude, coordinates.latitude));
+    if (
+      weatherWeek.length === 0 &&
+      coordinates.longitude &&
+      coordinates.latitude
+    ) {
+      dispatch(
+        getWeatherForWeek({
+          longitude: coordinates.longitude,
+          latitude: coordinates.latitude,
+        })
+      );
     }
   });
 
+  console.log(weatherWeek);
   const weekForecast = weatherWeek
-    ? Object.entries(weatherWeek).map(([date, dayInfo]) => (
-        <WeatherDayInfo key={date} date={date} dayInfo={dayInfo} />
+    ? weatherWeek.map((day) => (
+        <WeatherDayInfo key={day.date} date={day.date} dayInfo={day.data} />
       ))
     : "";
 
@@ -58,31 +73,33 @@ const WeatherDayInfo = ({ date, dayInfo }) => {
   const dateFormatted = new Date(date);
   const dayOfTheWeek = WEEK_DAYS[dateFormatted.getDay()];
 
-  let maxTemperature = undefined;
-  let maxWeatherIDPrior = null;
-  let maxWeatherDescriptionPrior = null;
+  let maxTemperature: null | number = null;
+  let maxWeatherIDPrior: number | null = null;
+  let maxWeatherDescriptionPrior: string = "";
 
-  dayInfo.forEach((timePeriod) => {
+  dayInfo.forEach((timePeriod: WeatherWeekElement) => {
     // Search of prior type of weather per day (Snow, Rain, Clear, etc.)
     let timePeriodIDPrior = CheckWeatherPrior(timePeriod.weatherID);
-    if (timePeriodIDPrior > maxWeatherIDPrior) {
+    if (!maxWeatherIDPrior || timePeriodIDPrior > maxWeatherIDPrior) {
       maxWeatherIDPrior = timePeriodIDPrior;
       maxWeatherDescriptionPrior = timePeriod.weatherDescription;
     }
     // Search of max temperature per day
-    if (maxTemperature === undefined) {
-      maxTemperature = timePeriod.temp;
-    } else if (maxTemperature < timePeriod.temp) {
-      maxTemperature = timePeriod.temp;
+    if (maxTemperature === null) {
+      maxTemperature = timePeriod.temperature;
+    } else if (maxTemperature < timePeriod.temperature) {
+      maxTemperature = timePeriod.temperature;
     }
   });
 
   return (
     <OneDayContainer>
       <DayOfTheWeek>{dayOfTheWeek}</DayOfTheWeek>
-      <WeatherImg src={PRIOR_WEATHER_IMAGES[maxWeatherIDPrior]} />
+      <WeatherImg src={PRIOR_WEATHER_IMAGES[maxWeatherIDPrior || 0]} />
       <WeatherDescription>{maxWeatherDescriptionPrior}</WeatherDescription>
-      <Temperature>{Math.round(maxTemperature)}°</Temperature>
+      <Temperature>
+        {maxTemperature ? Math.round(maxTemperature) : NaN}°
+      </Temperature>
     </OneDayContainer>
   );
 };

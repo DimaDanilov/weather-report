@@ -8,7 +8,7 @@ dotenv.config();
 
 module.exports = {
   mode: "development",
-  entry: ["./src/index.jsx"],
+  entry: ["./src/index.tsx"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
@@ -93,6 +93,7 @@ module.exports = {
   resolve: {
     alias: {
       Public: path.resolve(__dirname, "public/"),
+      Store: path.resolve(__dirname, "src/store"),
     },
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },

@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { WeekForecast } from "./weather_sections/WeekForecast";
-import { WeatherType } from "./weather_sections/WeatherType";
-import { WeatherInfo } from "./weather_sections/WeatherInfo";
+import { WeekForecast } from "../components/MainPage/weather_sections/WeekForecast";
+import { WeatherType } from "../components/MainPage/weather_sections/WeatherType";
+import { WeatherInfo } from "../components/MainPage/weather_sections/WeatherInfo";
 import { useSelector } from "react-redux";
+import { IRootState } from "../store/reducers/rootReducer";
 
 export const MainPage = () => {
   const coordinates = useSelector(
-    (state) => state.weatherReducer.currentLocation
+    (state: IRootState) => state.weather.currentLocation
   );
 
   return (
     <>
-      {!coordinates.longitude || !coordinates.latitude ? (
-        <WarningTitle>
-          Accept geolocation to show weather in your city
-        </WarningTitle>
-      ) : (
-        <></>
-      )}
+      {!coordinates.longitude ||
+        (!coordinates.latitude && (
+          <WarningTitle>
+            Accept geolocation to show weather in your city
+          </WarningTitle>
+        ))}
       <WeatherContainer>
         <WeatherType />
         <WeatherInfo />

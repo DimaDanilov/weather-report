@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWeatherForToday } from "../../api/weather";
-import { setGeoPositionAction } from "../../redux/reducers/weatherReducer";
 import { IconText } from "../staff/IconText";
 import locationIcon from "Public/icons/location_icon.svg";
 import humidityIcon from "Public/icons/humidity_icon.svg";
 import windIcon from "Public/icons/wind_icon.svg";
 import { Loader } from "../staff/Loader";
+import { IRootState } from "Store/reducers/rootReducer";
+import { setGeoPosition } from "Store/reducers/weatherReducer";
+import { getWeatherForToday } from "../../../api/WeatherApi";
+import { AppDispatch } from "Store";
 
 const MONTHS = [
   "Jan",
@@ -31,17 +33,22 @@ function getLocation(dispatch) {
     navigator.geolocation.getCurrentPosition(
       (position) =>
         dispatch(
-          setGeoPositionAction(
-            position.coords.latitude,
-            position.coords.longitude
-          )
+          setGeoPosition({
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude,
+          })
         ),
       (error) => {
         if (error.PERMISSION_DENIED) {
           console.log(
             "The User have denied the request for Geolocation. Displayed info for Moscow."
           );
-          dispatch(setGeoPositionAction(55.751244, 37.618423)); // Default weather Moscow
+          dispatch(
+            setGeoPosition({
+              longitude: 55.751244,
+              latitude: 37.618423,
+            })
+          ); // Default weather Moscow
         }
       }
     );
@@ -51,13 +58,13 @@ function getLocation(dispatch) {
 }
 
 export const WeatherInfo = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const coordinates = useSelector(
-    (state) => state.weatherReducer.currentLocation
+    (state: IRootState) => state.weather.currentLocation
   );
   const weatherToday = useSelector(
-    (state) => state.weatherReducer.weatherToday
+    (state: IRootState) => state.weather.weatherToday
   );
 
   const currentDate = new Date(weatherToday.currentTimestamp * 1000);
@@ -73,11 +80,14 @@ export const WeatherInfo = () => {
     else {
       if (!weatherToday.temperature) {
         dispatch(
-          getWeatherForToday(coordinates.longitude, coordinates.latitude)
+          getWeatherForToday({
+            longitude: coordinates.longitude,
+            latitude: coordinates.latitude,
+          })
         );
       }
     }
-  });
+  }, [coordinates.longitude, coordinates.latitude]);
 
   return weatherToday.temperature ? (
     <Container>
@@ -109,7 +119,9 @@ export const WeatherInfo = () => {
       <DateToday>{currentTime}</DateToday>
     </Container>
   ) : (
-    <Loader />
+    <>
+      <Loader />
+    </>
   );
 };
 

@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { WeatherCanvas } from "../3d/WeatherCanvas";
+import { WeatherCanvas } from "../3d/WeatherCanvas.jsx";
 import { useSelector } from "react-redux";
 import { Loader } from "../staff/Loader";
+import { IRootState } from "../../../store/reducers/rootReducer";
 
 export const WeatherType = () => {
-  const weatherToday = useSelector(
-    (state) => state.weatherReducer.weatherToday
-  );
+  const weatherToday = useSelector((state: IRootState) => {
+    return state.weather.weatherToday;
+  });
 
   return weatherToday.temperature ? (
     <div>
