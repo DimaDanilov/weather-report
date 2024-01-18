@@ -4,7 +4,7 @@ Weather App with display of current weather forecast, weekly forecast and 3D mod
 
 ## Preview
 
-You can watch [Weather Report](https://weather-report.vercel.app/) here.
+You can watch [Weather Report](https://weather-report-gules.vercel.app/) here.
 
 ## Technology
 
