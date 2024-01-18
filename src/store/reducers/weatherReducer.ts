@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { WeatherTodayModel, WeatherWeekModel } from "../../types/WeatherModel";
-import { LocationModel } from "../../types/LocationModel";
-import { getWeatherForToday, getWeatherForWeek } from "../../api/WeatherApi";
+import { WeatherTodayModel, WeatherWeekModel } from "@customTypes/WeatherModel";
+import { LocationModel } from "@customTypes/LocationModel";
+import { getWeatherForToday, getWeatherForWeek } from "@api/WeatherApi";
 
 interface WeatherState {
   currentLocation: LocationModel;

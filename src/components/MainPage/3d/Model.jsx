@@ -2,16 +2,16 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
-import sun3D from "Public/3d/sun.glb";
-import sunCloud3D from "Public/3d/sun_cloud.glb";
-import clouds3D from "Public/3d/clouds.glb";
-import drizzle3D from "Public/3d/drizzle.glb";
-import rain3D from "Public/3d/rain.glb";
-import thunder3D from "Public/3d/thunder.glb";
-import snow3D from "Public/3d/snow.glb";
-import default3D from "Public/3d/default.glb";
+import sun3D from "@3d/sun.glb";
+import sunCloud3D from "@3d/sun_cloud.glb";
+import clouds3D from "@3d/clouds.glb";
+import drizzle3D from "@3d/drizzle.glb";
+import rain3D from "@3d/rain.glb";
+import thunder3D from "@3d/thunder.glb";
+import snow3D from "@3d/snow.glb";
+import default3D from "@3d/default.glb";
 
-import { CheckWeatherPrior } from "../staff/WeatherPrior";
+import { CheckWeatherPrior } from "@components/MainPage/staff/WeatherPrior";
 
 const PRIOR_WEATHER_MODELS = [
   sun3D,

@@ -1,4 +1,8 @@
-import { WeatherTodayModel, WeatherWeekModel } from "../types/WeatherModel";
+import type {
+  WeatherTodayModel,
+  WeatherWeekElement,
+  WeatherWeekModel,
+} from "@customTypes/WeatherModel";
 
 export class WeatherAdapter {
   static transformDay(weatherItem: any): WeatherTodayModel {
@@ -25,7 +29,10 @@ export class WeatherAdapter {
       })
     );
 
-    let weekArrayGrouped = weekArray.reduce(function (r, a) {
+    let weekArrayGrouped = weekArray.reduce(function (
+      r: WeatherWeekModel[],
+      a: WeatherWeekElement
+    ) {
       // Группировка по дате
       const existingGroup = r.find((group) => group.date === a.date);
       if (existingGroup) {
@@ -34,7 +41,8 @@ export class WeatherAdapter {
         r.push({ date: a.date, data: [a] });
       }
       return r;
-    }, [] as { date: string; data: WeatherWeekModel[] }[]);
+    },
+    []);
 
     // Удаление сегодняшней даты
     if (weekArrayGrouped.length > 0) {

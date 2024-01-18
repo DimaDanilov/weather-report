@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { WeekForecast } from "../components/MainPage/weather_sections/WeekForecast";
-import { WeatherType } from "../components/MainPage/weather_sections/WeatherType";
-import { WeatherInfo } from "../components/MainPage/weather_sections/WeatherInfo";
+import { WeekForecast } from "@components/MainPage/weather_sections/WeekForecast";
+import { WeatherType } from "@components/MainPage/weather_sections/WeatherType";
+import { WeatherInfo } from "@components/MainPage/weather_sections/WeatherInfo";
 import { useSelector } from "react-redux";
-import { IRootState } from "../store/reducers/rootReducer";
+import { IRootState } from "@store/reducers/rootReducer";
 
 export const MainPage = () => {
   const coordinates = useSelector(

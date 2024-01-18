@@ -1,4 +1,4 @@
-import { firstDigit } from "../../../utils/firstDigit";
+import { firstDigit } from "@utils/firstDigit";
 
 // Prioritize type of weather
 export const CheckWeatherPrior = (code: number) => {

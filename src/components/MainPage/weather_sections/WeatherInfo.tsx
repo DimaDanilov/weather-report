@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { IconText } from "../staff/IconText";
-import locationIcon from "Public/icons/location_icon.svg";
-import humidityIcon from "Public/icons/humidity_icon.svg";
-import windIcon from "Public/icons/wind_icon.svg";
-import { Loader } from "../staff/Loader";
-import { IRootState } from "Store/reducers/rootReducer";
-import { setGeoPosition } from "Store/reducers/weatherReducer";
-import { getWeatherForToday } from "../../../api/WeatherApi";
-import { AppDispatch } from "Store";
+import { IconText } from "@components/MainPage/staff/IconText";
+import locationIcon from "@icons/location_icon.svg";
+import humidityIcon from "@icons/humidity_icon.svg";
+import windIcon from "@icons/wind_icon.svg";
+import { Loader } from "@components/MainPage/staff/Loader";
+import { IRootState } from "@store/reducers/rootReducer";
+import { setGeoPosition } from "@store/reducers/weatherReducer";
+import { getWeatherForToday } from "@api/WeatherApi";
+import { AppDispatch } from "@store/store";
 
 const MONTHS = [
   "Jan",
@@ -28,7 +28,7 @@ const MONTHS = [
 ];
 
 // Find current geolocation and send it to store
-function getLocation(dispatch) {
+function getLocation(dispatch: any) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) =>

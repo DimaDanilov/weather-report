@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@public/*": ["public/*"],
+      "@3d/*": ["public/3d/*"],
+      "@fonts/*": ["public/fonts/*"],
+      "@icons/*": ["public/icons/*"],
+      "@images/*": ["public/images/*"],
+      "@api/*": ["src/api/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@store/*": ["src/store/*"],
+      "@customTypes/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  }
+}

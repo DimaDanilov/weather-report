@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { WeatherCanvas } from "../3d/WeatherCanvas.jsx";
+import { WeatherCanvas } from "@components/MainPage/3d/WeatherCanvas.jsx";
 import { useSelector } from "react-redux";
-import { Loader } from "../staff/Loader";
-import { IRootState } from "../../../store/reducers/rootReducer";
+import { Loader } from "@components/MainPage/staff/Loader";
+import { IRootState } from "@store/reducers/rootReducer";
 
 export const WeatherType = () => {
   const weatherToday = useSelector((state: IRootState) => {

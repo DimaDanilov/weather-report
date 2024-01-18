@@ -2,20 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWeatherForWeek } from "../../../api/WeatherApi";
-import { CheckWeatherPrior } from "../staff/WeatherPrior";
-import sunImg from "Public/images/sun_small.png";
-import sunCloudImg from "Public/images/sun_cloud_small.png";
-import cloudsImg from "Public/images/clouds_small.png";
-import drizzleImg from "Public/images/drizzle_small.png";
-import rainImg from "Public/images/rain_small.png";
-import thunderImg from "Public/images/thunder_small.png";
-import snowImg from "Public/images/snow_small.png";
-import defaultImg from "Public/images/default_small.png";
-import { Loader } from "../staff/Loader";
-import { IRootState } from "Store/reducers/rootReducer";
-import { AppDispatch } from "Store";
-import { WeatherWeekElement } from "../../../types/WeatherModel";
+import { getWeatherForWeek } from "@api/WeatherApi";
+import { CheckWeatherPrior } from "@components/MainPage/staff/WeatherPrior";
+import sunImg from "@images/sun_small.png";
+import sunCloudImg from "@images/sun_cloud_small.png";
+import cloudsImg from "@images/clouds_small.png";
+import drizzleImg from "@images/drizzle_small.png";
+import rainImg from "@images/rain_small.png";
+import thunderImg from "@images/thunder_small.png";
+import snowImg from "@images/snow_small.png";
+import defaultImg from "@images/default_small.png";
+import { Loader } from "@components/MainPage/staff/Loader";
+import { IRootState } from "@store/reducers/rootReducer";
+import { AppDispatch } from "@store/store";
+import { WeatherWeekElement } from "@customTypes/WeatherModel";
 
 const WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const PRIOR_WEATHER_IMAGES = [
@@ -28,6 +28,11 @@ const PRIOR_WEATHER_IMAGES = [
   snowImg,
   defaultImg,
 ];
+
+interface WeatherDayInfoProps {
+  date: string;
+  dayInfo: WeatherWeekElement[];
+}
 
 export const WeekForecast = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,7 +59,6 @@ export const WeekForecast = () => {
     }
   });
 
-  console.log(weatherWeek);
   const weekForecast = weatherWeek
     ? weatherWeek.map((day) => (
         <WeatherDayInfo key={day.date} date={day.date} dayInfo={day.data} />
@@ -68,7 +72,7 @@ export const WeekForecast = () => {
   );
 };
 
-const WeatherDayInfo = ({ date, dayInfo }) => {
+const WeatherDayInfo = ({ date, dayInfo }: WeatherDayInfoProps) => {
   // Get current day of the week (Monday, Tuesday etc.)
   const dateFormatted = new Date(date);
   const dayOfTheWeek = WEEK_DAYS[dateFormatted.getDay()];

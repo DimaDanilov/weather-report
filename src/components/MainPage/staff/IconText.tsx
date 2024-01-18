@@ -1,16 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-export const IconText = (props) => {
+interface IconTextProps {
+  imgSrc: string;
+  textContent: string;
+  margin?: string;
+  fontSize?: string;
+  fontFamily?: string;
+}
+type ContainerProps = Pick<IconTextProps, "margin">;
+type TextProps = Pick<IconTextProps, "fontSize" | "fontFamily">;
+
+export const IconText: React.FC<IconTextProps> = (props) => {
   return (
-    <Container>
+    <Container margin={props.margin}>
       <Icon src={props.imgSrc} />
-      <Text>{props.textContent}</Text>
+      <Text fontSize={props.fontSize} fontFamily={props.fontFamily}>
+        {props.textContent}
+      </Text>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<ContainerProps>`
   margin: ${(props) => props.margin};
   display: flex;
   width: 100%;
@@ -18,11 +30,13 @@ const Container = styled.div`
   justify-content: center;
   gap: 5px;
 `;
+
 const Icon = styled.img`
   width: 30px;
   height: 30px;
 `;
-const Text = styled.h1`
+
+const Text = styled.h1<TextProps>`
   font-size: ${(props) => props.fontSize};
   font-family: ${(props) => props.fontFamily};
   font-weight: 300;

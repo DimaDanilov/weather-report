@@ -1,5 +1,8 @@
 import axios from "axios";
-import { WeatherTodayModel, WeatherWeekModel } from "../types/WeatherModel";
+import type {
+  WeatherTodayModel,
+  WeatherWeekModel,
+} from "@customTypes/WeatherModel";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { WeatherAdapter } from "./WeatherAdapter";
 
