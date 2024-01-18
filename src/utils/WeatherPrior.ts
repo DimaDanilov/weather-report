@@ -1,6 +1,6 @@
 import { firstDigit } from "@utils/firstDigit";
 
-// Prioritize type of weather
+// Receives Weather Code and then select what weather to show (function for prioritizing type of weather)
 export const CheckWeatherPrior = (code: number) => {
   if (code) {
     if (code === 800)

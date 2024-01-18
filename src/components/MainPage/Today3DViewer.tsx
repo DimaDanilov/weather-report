@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 import { Loader } from "@components/common/Loader";
 import { IRootState } from "@store/reducers/rootReducer";
 
-export const WeatherType = () => {
+export const Today3DViewer = () => {
   const weatherToday = useSelector((state: IRootState) => {
     return state.weather.weatherToday;
   });
 
-  return weatherToday.temperature ? (
+  return weatherToday.weatherID ? (
     <div>
       <WeatherCanvas weatherCode={weatherToday.weatherID} />
       <TypeTitle>{weatherToday.weatherType}</TypeTitle>

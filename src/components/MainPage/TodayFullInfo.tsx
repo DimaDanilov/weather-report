@@ -8,58 +8,12 @@ import humidityIcon from "@icons/humidity_icon.svg";
 import windIcon from "@icons/wind_icon.svg";
 import { Loader } from "@components/common/Loader";
 import { IRootState } from "@store/reducers/rootReducer";
-import { setGeoPosition } from "@store/reducers/weatherReducer";
 import { getWeatherForToday } from "@api/WeatherApi";
 import { AppDispatch } from "@store/store";
+import { MONTHS } from "@customTypes/DaysMonths";
 
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-// Find current geolocation and send it to store
-function getLocation(dispatch: any) {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) =>
-        dispatch(
-          setGeoPosition({
-            longitude: position.coords.longitude,
-            latitude: position.coords.latitude,
-          })
-        ),
-      (error) => {
-        if (error.PERMISSION_DENIED) {
-          console.log(
-            "The User have denied the request for Geolocation. Displayed info for Moscow."
-          );
-          dispatch(
-            setGeoPosition({
-              longitude: 55.751244,
-              latitude: 37.618423,
-            })
-          ); // Default weather Moscow
-        }
-      }
-    );
-  } else {
-    console.log("The Browser Does not Support Geolocation");
-  }
-}
-
-export const WeatherInfo = () => {
+export const TodayFullInfo = () => {
   const dispatch = useDispatch<AppDispatch>();
-
   const coordinates = useSelector(
     (state: IRootState) => state.weather.currentLocation
   );
@@ -68,26 +22,15 @@ export const WeatherInfo = () => {
   );
 
   const currentDate = new Date(weatherToday.currentTimestamp * 1000);
-  const currentTime =
-    currentDate.getDate() +
-    " " +
-    MONTHS[currentDate.getMonth()] +
-    ", " +
-    currentDate.getFullYear();
 
   useEffect(() => {
-    if (!coordinates.longitude || !coordinates.latitude) getLocation(dispatch);
-    else {
-      if (!weatherToday.temperature) {
-        dispatch(
-          getWeatherForToday({
-            longitude: coordinates.longitude,
-            latitude: coordinates.latitude,
-          })
-        );
-      }
-    }
-  }, [coordinates.longitude, coordinates.latitude]);
+    dispatch(
+      getWeatherForToday({
+        longitude: coordinates.longitude,
+        latitude: coordinates.latitude,
+      })
+    );
+  }, []);
 
   return weatherToday.temperature ? (
     <Container>
@@ -116,7 +59,9 @@ export const WeatherInfo = () => {
           fontFamily="MontserratLight"
         />
       </HumidityWindContainer>
-      <DateToday>{currentTime}</DateToday>
+      <DateToday>{`${currentDate.getDate()} ${
+        MONTHS[currentDate.getMonth()]
+      }, ${currentDate.getFullYear()}`}</DateToday>
     </Container>
   ) : (
     <>
