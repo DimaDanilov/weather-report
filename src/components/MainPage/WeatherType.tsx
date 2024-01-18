@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { WeatherCanvas } from "@components/MainPage/3d/WeatherCanvas.jsx";
 import { useSelector } from "react-redux";
-import { Loader } from "@components/MainPage/staff/Loader";
+import { Loader } from "@components/common/Loader";
 import { IRootState } from "@store/reducers/rootReducer";
 
 export const WeatherType = () => {

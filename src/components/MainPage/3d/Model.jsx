@@ -11,7 +11,7 @@ import thunder3D from "@3d/thunder.glb";
 import snow3D from "@3d/snow.glb";
 import default3D from "@3d/default.glb";
 
-import { CheckWeatherPrior } from "@components/MainPage/staff/WeatherPrior";
+import { CheckWeatherPrior } from "@utils/WeatherPrior";
 
 const PRIOR_WEATHER_MODELS = [
   sun3D,
