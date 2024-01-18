@@ -1,5 +1,4 @@
 {
-  "homepage": "https://DimaDanilov.github.io/weather-report",
   "name": "weather-report",
   "version": "0.1.0",
   "main": "index.tsx",
