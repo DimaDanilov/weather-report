@@ -35,7 +35,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      favicon: "Public/wr_logo.png",
+      favicon: "./public/wr_logo.png",
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
